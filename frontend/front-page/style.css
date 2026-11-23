@@ -175,6 +175,7 @@ button {
   stroke: rgba(255, 255, 255, 0.45);
   stroke-width: 2.5;
   stroke-dasharray: 4 10;
+  vector-effect: non-scaling-stroke;
 }
 
 .flight-plane {
@@ -182,29 +183,19 @@ button {
   top: 0;
   left: 0;
   z-index: 2;
+  width: 28px;
+  height: 28px;
   color: #ffffff;
+  opacity: 0;
   pointer-events: none;
-  offset-path: path('M-40 300 C 250 120, 520 330, 900 130 S 1300 60, 1500 90');
-  offset-rotate: auto 0deg;
-  animation: flyAlongPath 14s linear infinite;
+  will-change: transform, opacity;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
 }
 
-@keyframes flyAlongPath {
-  0% {
-    offset-distance: 0%;
-    opacity: 0;
-  }
-  4% {
-    opacity: 1;
-  }
-  94% {
-    opacity: 1;
-  }
-  100% {
-    offset-distance: 100%;
-    opacity: 0;
-  }
+.flight-plane svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* Glowing Sun */
@@ -219,6 +210,22 @@ button {
   box-shadow: 0 0 90px 30px rgba(255, 185, 70, 0.55);
   pointer-events: none;
   z-index: 1;
+  will-change: transform, opacity;
+  animation: sunrise 4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s both;
+}
+
+@keyframes sunrise {
+  0% {
+    transform: translateY(calc(100% + 140px));
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Hero Content Area */
@@ -906,8 +913,11 @@ button {
   }
 
   .flight-plane {
-    animation: none;
     display: none;
+  }
+
+  .sun {
+    animation: none;
   }
 
   .destination-card:hover {
