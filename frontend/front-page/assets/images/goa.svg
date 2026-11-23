@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goaSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff7051"/>
+      <stop offset="55%" stop-color="#ff9d6c"/>
+      <stop offset="100%" stop-color="#fec58d"/>
+    </linearGradient>
+    <linearGradient id="goaSea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#14728d"/>
+      <stop offset="100%" stop-color="#1e94b4"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" fill="url(#goaSky)"/>
+  <!-- Sun setting into sea -->
+  <circle cx="150" cy="110" r="36" fill="#fff4c2"/>
+  <!-- Sea -->
+  <rect y="112" width="300" height="88" fill="url(#goaSea)"/>
+  <!-- Water ripples reflecting sunset -->
+  <g stroke="#ffdfa4" stroke-width="2.5" opacity="0.75" stroke-linecap="round">
+    <path d="M55 125 H245"/>
+    <path d="M85 138 H215"/>
+    <path d="M105 152 H195"/>
+    <path d="M125 164 H175"/>
+  </g>
+  <!-- Sandy Shore -->
+  <path d="M0 174 Q150 148 300 176 V200 H0 Z" fill="#edd09b"/>
+  <!-- Palm Trunk -->
+  <path d="M236 186 Q242 128 228 92" stroke="#462c19" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Palm Fronds -->
+  <g fill="#1b6335">
+    <path d="M228 92 Q196 82 186 98 Q212 88 228 92 Z"/>
+    <path d="M228 92 Q258 76 272 96 Q248 85 228 92 Z"/>
+    <path d="M228 92 Q214 66 198 68 Q216 75 228 92 Z"/>
+    <path d="M228 92 Q242 64 260 67 Q239 75 228 92 Z"/>
+    <path d="M228 92 Q232 58 224 54 Q228 72 228 92 Z"/>
+  </g>
+</svg>

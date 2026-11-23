@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="jaipurSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f699b2"/>
+      <stop offset="60%" stop-color="#fbc7b9"/>
+      <stop offset="100%" stop-color="#fee5cf"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" fill="url(#jaipurSky)"/>
+  <!-- Central Palace structure -->
+  <rect x="52" y="94" width="196" height="86" fill="#be4d43"/>
+  <rect x="36" y="108" width="28" height="72" fill="#aa4238"/>
+  <rect x="236" y="108" width="28" height="72" fill="#aa4238"/>
+  <!-- Central Dome -->
+  <path d="M118 94 Q150 38 182 94 Z" fill="#d35f50"/>
+  <!-- Dome Finial -->
+  <circle cx="150" cy="36" r="5" fill="#f5a623"/>
+  <line x1="150" y1="36" x2="150" y2="28" stroke="#f5a623" stroke-width="2"/>
+  <!-- Side Domes -->
+  <path d="M36 108 Q50 78 64 108 Z" fill="#d35f50"/>
+  <path d="M236 108 Q250 78 264 108 Z" fill="#d35f50"/>
+  <!-- Arches and windows (Jharokhas) -->
+  <g fill="#fee3ce">
+    <path d="M78 180 V138 Q90 118 102 138 V180 Z"/>
+    <path d="M136 180 V132 Q150 108 164 132 V180 Z"/>
+    <path d="M198 180 V138 Q210 118 222 138 V180 Z"/>
+    <circle cx="90" cy="112" r="5"/>
+    <circle cx="150" cy="98" r="6"/>
+    <circle cx="210" cy="112" r="5"/>
+  </g>
+  <!-- Palace Base Plinth -->
+  <rect y="180" width="300" height="20" fill="#e5b172"/>
+  <rect y="180" width="300" height="4" fill="#caa066"/>
+</svg>
