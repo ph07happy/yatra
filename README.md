@@ -102,7 +102,7 @@ GitHub Actions (.github/workflows/firebase-hosting.yml)
        ↓
 Firebase Hosting CDN
        ↓
-Live Production URL (PROJECT_ID.web.app)
+Live Production URL: https://yatra-96243.web.app (and https://yatra-96243.firebaseapp.com)
 ```
 
 ### Normal Git Workflow:
@@ -138,7 +138,7 @@ npm install -g firebase-tools
 firebase login
 
 # Set or change the active project
-firebase use <YOUR_FIREBASE_PROJECT_ID>
+firebase use yatra-96243
 ```
 
 ### GitHub Actions Secret Configuration
