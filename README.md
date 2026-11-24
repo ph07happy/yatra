@@ -2,7 +2,7 @@
 
 > Say where, get a journey built around you.
 
-**Yatra** (यात्रा) is an intelligent travel planning platform designed to generate personalized, day-by-day travel itineraries. This repository contains the frontend web application, Firebase Hosting configuration, and automated GitHub Actions deployment pipeline.
+**Yatra** (यात्रा) is an intelligent travel planning platform designed to generate personalized, day-by-day travel itineraries. This repository contains the React + Vite frontend web application, Firebase Hosting configuration, and automated GitHub Actions deployment pipeline.
 
 ---
 
@@ -10,13 +10,14 @@
 
 | Module | Status | Description |
 | :--- | :--- | :--- |
-| **Front Page / Landing** | ✅ **Complete** | Responsive, modern homepage (`frontend/front-page/`) |
-| **Firebase Hosting** | ✅ **Configured** | Serving `frontend/front-page` static bundle |
-| **CI/CD Pipeline** | ✅ **Configured** | GitHub Actions automatic deployment on push to `main` |
-| **Authentication Module** | ⏳ *Pending* | Reserved under `frontend/login/` for future Firebase Auth |
-| **Backend & Cloud Functions**| ⏳ *Pending* | Reserved under `backend/` for serverless services |
+| **Front Page / Landing** | ✅ **Complete** | Responsive, modern homepage in React (`Home.jsx`) |
+| **Login & Sign Up UI** | ✅ **Complete** | Polished React auth experience (`Login.jsx`, `Signup.jsx`) |
+| **Password Validation** | ✅ **Complete** | Dynamic 5-rule strength indicator & matching validation |
+| **Firebase Hosting** | ✅ **Configured** | Serving `frontend/yatra-app/dist` with SPA routing |
+| **CI/CD Pipeline** | ✅ **Configured** | GitHub Actions automatic build & deployment on push to `main` |
+| **Authentication Backend**| ⏳ *Pending* | Client UI ready for future Firebase Auth integration |
+| **Cloud Functions & DB** | ⏳ *Pending* | Reserved under `backend/` for serverless services |
 | **AI Trip Planner Engine** | ⏳ *Pending* | Recommendation system and itinerary generator |
-| **Hotel / Flight APIs** | ⏳ *Pending* | Integration of synthetic datasets & live booking APIs |
 
 ---
 
@@ -26,31 +27,49 @@
 Yatra/
 │
 ├── frontend/
-│   │
-│   ├── front-page/                  # Active production frontend
-│   │   ├── index.html               # Semantic HTML structure
-│   │   ├── style.css                # Master responsive stylesheet
-│   │   ├── script.js                # Modern vanilla JavaScript interactions
-│   │   │
-│   │   └── assets/
-│   │       ├── images/              # Optimized destination SVGs (Manali, Goa, Jaipur, Alleppey)
-│   │       ├── icons/               # Favicon & UI vector assets
-│   │       └── fonts/               # Local fonts placeholder (uses Google Fonts CDN)
-│   │
-│   └── login/                       # Reserved for future login/signup module
-│       └── README.md
+│   └── yatra-app/                   # React + Vite application
+│       ├── public/
+│       │   └── assets/              # Destination SVGs & icon vector assets
+│       │
+│       ├── src/
+│       │   ├── components/          # Reusable UI components
+│       │   │   ├── Navbar.jsx       # Responsive header navigation
+│       │   │   ├── Footer.jsx       # Global site footer
+│       │   │   ├── Button.jsx       # Button with variants (primary, secondary, login)
+│       │   │   ├── InputField.jsx   # Accessible form input with inline error feedback
+│       │   │   ├── PasswordField.jsx # Password input with show/hide toggle
+│       │   │   ├── PasswordRequirements.jsx # Dynamic 5-rule security checklist
+│       │   │   └── Toast.jsx        # Accessible status notification banner
+│       │   │
+│       │   ├── pages/               # Route views
+│       │   │   ├── Home.jsx         # Landing page with animated hero & destination cards
+│       │   │   ├── Login.jsx        # Login page with validation & forgot-password UI
+│       │   │   └── Signup.jsx       # Comprehensive sign-up with password verification
+│       │   │
+│       │   ├── styles/              # Modular stylesheets
+│       │   │   ├── global.css       # Color variables, typography, and base resets
+│       │   │   ├── components.css   # Component styling (nav, buttons, forms, cards)
+│       │   │   ├── auth.css         # Authentication layout, cards, and transitions
+│       │   │   └── home.css         # Hero animations, mountain silhouettes, cards
+│       │   │
+│       │   ├── App.jsx              # Client-side router configuration (react-router-dom)
+│       │   └── main.jsx             # React DOM root entry
+│       │
+│       ├── index.html               # Vite HTML template with Google Fonts
+│       ├── package.json             # React, React Router, Vite dependencies
+│       └── vite.config.js           # Vite configuration (outDir: dist)
 │
 ├── backend/                         # Reserved for future backend / Cloud Functions
 │   └── README.md
 │
 ├── .github/
 │   └── workflows/
-│       └── firebase-hosting.yml     # Automated Firebase Hosting deployment workflow
+│       └── firebase-hosting.yml     # Automated build & deploy workflow
 │
 ├── generate_data.py                 # Synthetic hotel and flight generator (standalone)
-├── firebase.json                    # Firebase Hosting configuration (public: frontend/front-page)
-├── .firebaserc                      # Firebase project configuration
-├── .gitignore                       # Standard ignore rules (secrets, node_modules, logs)
+├── firebase.json                    # Firebase Hosting config (public: frontend/yatra-app/dist)
+├── .firebaserc                      # Firebase project configuration (yatra-96243)
+├── .gitignore                       # Standard ignore rules (node_modules, dist, secrets)
 └── README.md                        # Documentation and guides
 ```
 
@@ -58,30 +77,30 @@ Yatra/
 
 ## 3. Local Development
 
-The frontend is built with vanilla **HTML5**, **CSS3**, and **JavaScript (ES6+)** with zero external dependencies or build steps required.
+### Prerequisites
+- Node.js (v18+)
+- npm (v9+)
 
-### Option A: Open directly in your browser
-Simply double-click or open `frontend/front-page/index.html` in any modern web browser (Chrome, Edge, Firefox, Safari).
-
-### Option B: Local Development Server (Recommended)
-You can run a local HTTP server from the project root:
-
-**Using Python:**
+### Running the Development Server
 ```bash
-# Serve the front-page directory directly:
-python -m http.server 8000 --directory frontend/front-page
-```
-Then navigate to: [http://localhost:8000](http://localhost:8000)
+# 1. Navigate to the React app
+cd frontend/yatra-app
 
-**Using Node / npx:**
-```bash
-npx serve frontend/front-page
+# 2. Install dependencies (if not already installed)
+npm install
+
+# 3. Start the Vite development server
+npm run dev
 ```
 
-**Using Firebase Emulator:**
+The application will start at `http://localhost:5173/` with hot module replacement (HMR).
+
+### Building for Production
 ```bash
-firebase emulators:start --only hosting
+cd frontend/yatra-app
+npm run build
 ```
+This generates the optimized production bundle in `frontend/yatra-app/dist/`.
 
 ---
 
@@ -90,44 +109,30 @@ firebase emulators:start --only hosting
 The project is configured for automated CI/CD using **GitHub Actions** and **Firebase Hosting**.
 
 ```text
-Local Edits (Antigravity)
+Local Edits (Antigravity IDE)
        ↓
 git add .
        ↓
-git commit -m "Update frontend features"
+git commit -m "Enhance login and sign up forms"
        ↓
 git push origin main
        ↓
 GitHub Actions (.github/workflows/firebase-hosting.yml)
+       ├── 1. Check out repository
+       ├── 2. Install dependencies (npm ci)
+       ├── 3. Build application (npm run build)
+       └── 4. Deploy to Firebase Hosting
        ↓
-Firebase Hosting CDN
-       ↓
-Live Production URL: https://yatra-96243.web.app (and https://yatra-96243.firebaseapp.com)
+Live Production URL (https://yatra-96243.web.app)
 ```
 
-### Normal Git Workflow:
-```bash
-# 1. Check file status
-git status
-
-# 2. Stage changes
-git add .
-
-# 3. Commit with a descriptive message
-git commit -m "Enhance hero visuals and destination cards"
-
-# 4. Push to production branch
-git push origin main
-```
-
-Pushing to `main` automatically triggers the GitHub Action, which securely authenticates with Firebase and deploys the `frontend/front-page/` directory to the live production channel. Pull requests to `main` automatically generate temporary preview URLs.
+Pushing to `main` automatically triggers the GitHub Action, which builds the React app and deploys the `frontend/yatra-app/dist/` bundle to the live production channel. Pull requests to `main` automatically generate temporary preview URLs.
 
 ---
 
 ## 5. Firebase Setup & CLI Commands
 
 ### Prerequisites
-Install the Firebase CLI if you wish to run manual deploys or CLI tools:
 ```bash
 npm install -g firebase-tools
 ```
@@ -137,36 +142,22 @@ npm install -g firebase-tools
 # Sign in to your Google / Firebase account
 firebase login
 
-# Set or change the active project
+# Verify active project
 firebase use yatra-96243
 ```
 
-### GitHub Actions Secret Configuration
-To link GitHub Actions with Firebase Hosting:
-1. Run:
-   ```bash
-   firebase init hosting:github
-   ```
-2. Follow the prompts to authorize GitHub, select your repository, and set the production branch to `main`.
-3. Firebase will automatically add the encrypted secret `FIREBASE_SERVICE_ACCOUNT_...` to your repository settings.
-
-### Manual Deployment (Optional / Fallback)
+### Manual Deployment (Fallback)
 ```bash
+# Build the production bundle
+cd frontend/yatra-app
+npm run build
+cd ../..
+
+# Deploy to Firebase Hosting
 firebase deploy --only hosting
 ```
 
 ---
 
-## 6. Accessibility & Design Standards
-
-- **Semantic HTML**: Accessible landmarks (`header`, `nav`, `main`, `section`, `footer`).
-- **Responsive Layout**: Designed and verified across 1440px, 1024px, 768px, 480px, and 360px viewport widths.
-- **Card Grid**: 4 columns (Desktop), 2 columns (Tablet), 1 column (Mobile).
-- **Reduced Motion**: Full support for `prefers-reduced-motion: reduce`.
-- **Focus Indicators**: High-contrast, visible `:focus-visible` states using `--marigold` outline.
-- **Non-blocking Notices**: Accessible toast feedback for features currently in development.
-
----
-
-## 7. License
+## 6. License
 &copy; 2026 Yatra. All rights reserved.

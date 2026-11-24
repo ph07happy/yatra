@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "frontend/front-page",
+    "public": "frontend/yatra-app/dist",
     "ignore": [
       "firebase.json",
       "**/.*",

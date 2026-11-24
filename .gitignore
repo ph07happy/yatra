@@ -21,6 +21,8 @@ ui-debug.log
 
 # Node & Dependencies
 node_modules/
+dist/
+dist-ssr/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

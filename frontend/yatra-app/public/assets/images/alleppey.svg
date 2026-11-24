@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="alleppeySky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4edd0"/>
+      <stop offset="60%" stop-color="#9ee0c3"/>
+      <stop offset="100%" stop-color="#76ccaa"/>
+    </linearGradient>
+    <linearGradient id="backwater" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#248a7a"/>
+      <stop offset="100%" stop-color="#186a5d"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" fill="url(#alleppeySky)"/>
+  <!-- Water body -->
+  <rect y="114" width="300" height="86" fill="url(#backwater)"/>
+  <!-- Water ripples -->
+  <g stroke="#b8edd9" stroke-width="2.5" opacity="0.6" stroke-linecap="round">
+    <path d="M28 148 H112"/>
+    <path d="M176 168 H268"/>
+    <path d="M88 184 H168"/>
+  </g>
+  <!-- Houseboat Hull -->
+  <path d="M94 130 H206 L194 114 H106 Z" fill="#845325"/>
+  <path d="M104 114 Q150 80 196 114 Z" fill="#dd4e72"/>
+  <rect x="90" y="127" width="120" height="8" rx="3.5" fill="#583516"/>
+  <!-- Canopy detailing -->
+  <line x1="120" y1="114" x2="120" y2="98" stroke="#f68fa5" stroke-width="1.5"/>
+  <line x1="150" y1="114" x2="150" y2="84" stroke="#f68fa5" stroke-width="1.5"/>
+  <line x1="180" y1="114" x2="180" y2="98" stroke="#f68fa5" stroke-width="1.5"/>
+  <!-- Canal Palm Trees on banks -->
+  <g stroke="#422916" stroke-width="4.5" fill="none" stroke-linecap="round">
+    <path d="M30 118 Q36 68 25 38"/>
+    <path d="M272 116 Q264 74 274 46"/>
+  </g>
+  <!-- Palm Fronds -->
+  <g fill="#1a5e33">
+    <path d="M25 38 Q-1 30 -6 46 Q14 36 25 38 Z"/>
+    <path d="M25 38 Q50 26 60 44 Q40 34 25 38 Z"/>
+    <path d="M25 38 Q18 16 32 14 Q28 28 25 38 Z"/>
+    <path d="M274 46 Q248 36 240 52 Q260 42 274 46 Z"/>
+    <path d="M274 46 Q300 34 308 52 Q288 42 274 46 Z"/>
+    <path d="M274 46 Q280 24 266 22 Q270 36 274 46 Z"/>
+  </g>
+</svg>
