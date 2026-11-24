@@ -92,10 +92,6 @@ export default function Home() {
 
         {/* Hero Content (Centered Above Sky & Mountains) */}
         <div className="hero-inner">
-          <div className="brand-badge">
-            <span className="badge-dot" aria-hidden="true"></span>
-            <span>Next-Generation Travel AI</span>
-          </div>
           <h1 className="hero-title">Yatra</h1>
           <p className="hero-deva" lang="hi">यात्रा</p>
           <p className="hero-tag">
