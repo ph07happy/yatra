@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Toast from '../components/Toast';
 import HeroFlight from '../components/HeroFlight';
-import CelestialBackground from '../components/CelestialBackground';
 import '../styles/home.css';
 
 const DESTINATIONS = [
@@ -87,10 +86,11 @@ export default function Home() {
         {/* Kinematic Flight Path & Animated Airplane */}
         <HeroFlight heroRef={heroRef} />
 
-        {/* Synchronized 23s Celestial Cycle (Sun, Moon & Mountain Shadows) */}
-        <CelestialBackground />
+        {/* Glowing Sun (Active in 11s Day Phase) & Moon (Active in 12s Night Phase) */}
+        <div className="sun" aria-hidden="true"></div>
+        <div className="moon" aria-hidden="true"></div>
 
-        {/* Hero Content */}
+        {/* Hero Content (Centered Above Sky & Mountains) */}
         <div className="hero-inner">
           <div className="brand-badge">
             <span className="badge-dot" aria-hidden="true"></span>
@@ -115,6 +115,30 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        {/* Mountain Silhouette at Base of Hero (Positioned below text and in front of sun) */}
+        <svg
+          className="mountains"
+          viewBox="0 0 1440 220"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            className="ridge-far"
+            fill="#5b3a86"
+            opacity="0.75"
+            d="M0 150 L140 70 L250 130 L380 40 L520 140 L640 80 L780 150 L930 50 L1070 135 L1200 75 L1330 130 L1440 90 V220 H0Z"
+          />
+          <path
+            className="ridge-near"
+            fill="#2f2d6b"
+            d="M0 190 L160 120 L300 175 L460 105 L620 180 L760 130 L920 185 L1080 115 L1240 180 L1440 130 V220 H0Z"
+          />
+          <path
+            fill="#f7f5fb"
+            d="M0 215 L200 170 L420 205 L640 175 L860 208 L1100 172 L1300 205 L1440 185 V220 H0Z"
+          />
+        </svg>
       </header>
 
       {/* ==================== NAVIGATION BAR ==================== */}
