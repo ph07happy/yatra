@@ -1,10 +1,15 @@
 /* ==========================================================================
    YATRA — AI Trip Planner
    Home Page Stylesheet (home.css)
+   Synchronized 23-second Day (11s) & Night (12s) Celestial Cycle
    ========================================================================== */
 
+:root {
+  --cycle: 23s; /* 11s Sun / Day Phase + 12s Moon / Night Phase */
+}
+
 /* --------------------------------------------------------------------------
-   1. Hero Section
+   1. Hero Section & Celestial Cycle
    -------------------------------------------------------------------------- */
 .hero {
   position: relative;
@@ -17,7 +22,35 @@
   justify-content: space-between;
 }
 
-/* Flight Path & Airplane */
+/* Starfield Overlay for Night Sky Transition */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(1.5px 1.5px at 8% 14%, #ffffff 50%, transparent 100%),
+    radial-gradient(1px 1px at 17% 32%, #ffffff 50%, transparent 100%),
+    radial-gradient(2px 2px at 26% 10%, #ffffff 50%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 34% 24%, #ffffff 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 44% 8%, #ffffff 50%, transparent 100%),
+    radial-gradient(1px 1px at 52% 30%, #ffffff 50%, transparent 100%),
+    radial-gradient(2px 2px at 61% 14%, #ffffff 50%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 70% 26%, #ffffff 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 78% 9%, #ffffff 50%, transparent 100%),
+    radial-gradient(1px 1px at 86% 22%, #ffffff 50%, transparent 100%),
+    radial-gradient(2px 2px at 93% 12%, #ffffff 50%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 13% 48%, #ffffff 50%, transparent 100%),
+    radial-gradient(1px 1px at 38% 44%, #ffffff 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 66% 42%, #ffffff 50%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 88% 40%, #ffffff 50%, transparent 100%),
+    linear-gradient(180deg, #080b26 0%, #151a45 50%, #2d2565 85%, #4a3278 100%);
+  animation: nightSkyTransition var(--cycle) linear infinite;
+}
+
+/* Flight Path & Airplane Kinematics */
 .flight-route {
   position: absolute;
   inset: 0;
@@ -44,30 +77,18 @@
   height: 28px;
   color: #ffffff;
   pointer-events: none;
-  offset-path: path('M-40 300 C 250 120, 520 330, 900 130 S 1300 60, 1500 90');
-  offset-rotate: auto 0deg;
-  animation: flyAlongPath 14s linear infinite;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+  opacity: 0;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
 }
 
-@keyframes flyAlongPath {
-  0% {
-    offset-distance: 0%;
-    opacity: 0;
-  }
-  4% {
-    opacity: 1;
-  }
-  94% {
-    opacity: 1;
-  }
-  100% {
-    offset-distance: 100%;
-    opacity: 0;
-  }
+.flight-plane svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-/* Glowing Sun & Moon */
+/* Glowing Sun (Active during 11s Day Phase) */
 .sun {
   position: absolute;
   right: 12%;
@@ -79,8 +100,11 @@
   box-shadow: 0 0 90px 30px rgba(255, 185, 70, 0.55);
   pointer-events: none;
   z-index: 1;
+  will-change: transform, opacity;
+  animation: sunCycle var(--cycle) linear infinite;
 }
 
+/* Glowing Moon (Active during 12s Night Phase) */
 .moon {
   position: absolute;
   top: 96px;
@@ -93,9 +117,126 @@
   opacity: 0;
   pointer-events: none;
   z-index: 1;
+  will-change: transform, opacity;
+  animation: moonCycle var(--cycle) linear infinite;
 }
 
-/* Hero Content Area */
+/* Mountains Silhouette at Base of Hero */
+.mountains {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  max-height: 160px;
+  display: block;
+  z-index: 2;
+  margin-bottom: -1px;
+}
+
+.ridge-far {
+  animation: mountainRidgeFar var(--cycle) linear infinite;
+}
+
+.ridge-near {
+  animation: mountainRidgeNear var(--cycle) linear infinite;
+}
+
+/* --------------------------------------------------------------------------
+   Keyframes: 23s Day/Night Cycle (11s Day / 12s Night)
+   -------------------------------------------------------------------------- */
+
+/* Sun Keyframes: 11s Day Phase (0% to 47.8%) */
+@keyframes sunCycle {
+  0% {
+    transform: translateY(calc(100% + 140px));
+    opacity: 0;
+  }
+  8.7% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  39.1% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  47.8%,
+  100% {
+    transform: translateY(calc(100% + 140px));
+    opacity: 0;
+  }
+}
+
+/* Moon Keyframes: 12s Night Phase (47.8% to 100%) */
+@keyframes moonCycle {
+  0%,
+  47.8% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  56.5%,
+  91.3% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+/* Starfield / Night Sky Transition */
+@keyframes nightSkyTransition {
+  0%,
+  39.1% {
+    opacity: 0;
+  }
+  47.8% {
+    opacity: 0.65;
+  }
+  56.5%,
+  91.3% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Mountain Far Ridge Dynamic Lighting */
+@keyframes mountainRidgeFar {
+  0%,
+  39.1%,
+  100% {
+    fill: #5b3a86;
+  }
+  47.8% {
+    fill: #3d2d6b;
+  }
+  56.5%,
+  91.3% {
+    fill: #2a2456;
+  }
+}
+
+/* Mountain Near Ridge Dynamic Lighting */
+@keyframes mountainRidgeNear {
+  0%,
+  39.1%,
+  100% {
+    fill: #2f2d6b;
+  }
+  47.8% {
+    fill: #222358;
+  }
+  56.5%,
+  91.3% {
+    fill: #161a40;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Hero Content Area
+   -------------------------------------------------------------------------- */
 .hero-inner {
   position: relative;
   z-index: 3;
@@ -103,6 +244,32 @@
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 80px 24px 30px;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--marigold);
+  box-shadow: 0 0 8px var(--marigold);
 }
 
 .hero-title {
@@ -140,20 +307,8 @@
   align-items: center;
 }
 
-/* Mountains Silhouette at Base of Hero */
-.mountains {
-  position: relative;
-  width: 100%;
-  height: auto;
-  min-height: 100px;
-  max-height: 160px;
-  display: block;
-  z-index: 2;
-  margin-bottom: -1px;
-}
-
 /* --------------------------------------------------------------------------
-   2. Destinations Section
+   3. Destinations Section
    -------------------------------------------------------------------------- */
 #main-content {
   flex: 1 0 auto;
@@ -193,7 +348,7 @@
   gap: 20px;
 }
 
-/* Card Component */
+/* Destination Card Component */
 .destination-card {
   position: relative;
   background-color: var(--card-bg);
@@ -310,7 +465,9 @@
   transform: translateX(3px);
 }
 
-/* Responsive Media Queries */
+/* --------------------------------------------------------------------------
+   4. Responsive Media Queries
+   -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
   .destinations-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -372,5 +529,20 @@
 
   .hero-cta-group .btn {
     width: 100%;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .sun,
+  .moon,
+  .ridge-far,
+  .ridge-near {
+    animation: none !important;
+  }
+
+  .flight-plane {
+    display: none !important;
   }
 }

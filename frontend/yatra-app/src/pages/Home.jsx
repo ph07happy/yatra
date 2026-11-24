@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Toast from '../components/Toast';
+import HeroFlight from '../components/HeroFlight';
+import CelestialBackground from '../components/CelestialBackground';
 import '../styles/home.css';
 
 const DESTINATIONS = [
@@ -49,6 +51,7 @@ const DESTINATIONS = [
 
 export default function Home() {
   const [toast, setToast] = useState(null);
+  const heroRef = useRef(null);
 
   const handlePlanClick = () => {
     const destSection = document.getElementById('destinations');
@@ -80,30 +83,19 @@ export default function Home() {
   return (
     <div className="home-page">
       {/* ==================== HERO SECTION ==================== */}
-      <header className="hero" id="hero">
-        {/* Flight Trajectory */}
-        <svg
-          className="flight-route"
-          viewBox="0 0 1440 520"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path d="M-40 300 C 250 120, 520 330, 900 130 S 1300 60, 1500 90" />
-        </svg>
+      <header ref={heroRef} className="hero" id="hero">
+        {/* Kinematic Flight Path & Animated Airplane */}
+        <HeroFlight heroRef={heroRef} />
 
-        {/* Flight Airplane */}
-        <div className="flight-plane" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
-          </svg>
-        </div>
-
-        {/* Glowing Sun and Moon */}
-        <div className="sun" aria-hidden="true"></div>
-        <div className="moon" aria-hidden="true"></div>
+        {/* Synchronized 23s Celestial Cycle (Sun, Moon & Mountain Shadows) */}
+        <CelestialBackground />
 
         {/* Hero Content */}
         <div className="hero-inner">
+          <div className="brand-badge">
+            <span className="badge-dot" aria-hidden="true"></span>
+            <span>Next-Generation Travel AI</span>
+          </div>
           <h1 className="hero-title">Yatra</h1>
           <p className="hero-deva" lang="hi">यात्रा</p>
           <p className="hero-tag">
@@ -123,28 +115,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-
-        {/* Mountains Silhouette */}
-        <svg
-          className="mountains"
-          viewBox="0 0 1440 220"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            fill="#5b3a86"
-            opacity="0.75"
-            d="M0 150 L140 70 L250 130 L380 40 L520 140 L640 80 L780 150 L930 50 L1070 135 L1200 75 L1330 130 L1440 90 V220 H0Z"
-          />
-          <path
-            fill="#2f2d6b"
-            d="M0 190 L160 120 L300 175 L460 105 L620 180 L760 130 L920 185 L1080 115 L1240 180 L1440 130 V220 H0Z"
-          />
-          <path
-            fill="#f7f5fb"
-            d="M0 215 L200 170 L420 205 L640 175 L860 208 L1100 172 L1300 205 L1440 185 V220 H0Z"
-          />
-        </svg>
       </header>
 
       {/* ==================== NAVIGATION BAR ==================== */}
@@ -210,7 +180,7 @@ export default function Home() {
       {/* ==================== FOOTER ==================== */}
       <Footer />
 
-      {/* Toast Notification */}
+      {/* Accessible Toast Notification */}
       <Toast toast={toast} onDismiss={() => setToast(null)} />
     </div>
   );
